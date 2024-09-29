@@ -1,0 +1,71 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.menu-item {
+    border: 1px solid black;
+    margin: 10px;
+    padding: 10px;
+    color: white;
+    position: relative;
+}
+
+.title {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 5px;
+    border: 1px solid black;
+}
+
+/* Background colors */
+.chicken {
+    background-color: #e63946;
+}
+
+.beef {
+    background-color: #f1faee;
+}
+
+.sushi {
+    background-color: #a8dadc;
+}
+
+/* Desktop view */
+@media (min-width: 992px) {
+    .menu-item {
+        width: calc(33.33% - 20px); /* Three equal sections with margin */
+        float: left;
+    }
+}
+
+/* Tablet view */
+@media (max-width: 991px) and (min-width: 768px) {
+    .menu-item {
+        width: calc(50% - 20px); /* Two equal sections in the first row */
+        float: left;
+    }
+    .menu-item:nth-child(3) {
+        width: 100%; /* Third section takes full width */
+        clear: both; /* Clear float for the new row */
+    }
+}
+
+/* Mobile view */
+@media (max-width: 767px) {
+    .menu-item {
+        width: 100%; /* Full width for mobile */
+        float: none; /* Reset float */
+    }
+}

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Income/Expense</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="add-inc-exp.css">
+
+    <style>
+        .popUp {
+        position: absolute;
+        height: 25vh;
+        width: 25vw;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); 
+        background: azure;
+        border: #000000 solid 1px;
+        border-radius: 10px;
+        opacity: 0; 
+        visibility: hidden; 
+        transition: opacity 0.5s ease, visibility 0.5s ease; 
+        justify-content: center; 
+        align-items: center;
+        flex-direction: column;
+        display: flex; 
+        }
+
+        .popUp.show {
+            opacity: 1; 
+            visibility: visible; 
+        }
+    </style>
+    
+</head>
+
+<header>
+    <nav class="navbar fixed-top" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <img src="logo.svg" alt="Logo" width="60" height="30" class="d-inline-block align-text-top">
+              <span id="brand">Expense Tracker</span>
+            </a>
+            <span class="navbar-text" id="User_Name">
+              Hi Isha!!
+            </span>
+          </div>
+    </nav>
+</header>
+
+<body>
+    <div id="regMessagePopUp" class="popUp"><h2>Added successfully</h2><img src="checkMark.png" width="30" height="30"> </div>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+                <div class="position-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" href="homepage.html">
+                                <i class="bi bi-house-door"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="add-inc-exp.html">
+                                <i class="bi bi-plus-circle"></i>Add Inc/Exp
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="transactions.html">
+                                <i class="bi bi-arrow-left-right"></i> Transactions
+                            </a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="viewinc.html">
+                                <i class="bi bi-wallet"></i>View Income
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="viewexp.html">
+                                <i class="bi bi-cash-coin"></i>View Expenses
+                            </a>
+                        </li>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <i class="bi bi-bar-chart"></i>Statistics
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="position-absolute bottom-0 w-95">
+                    <ul class="nav flex-column mb-3">
+                        <li class="nav-item" id="logout">
+                            <a class="nav-link" href="login.html">
+                                <span id="lgout"><i class="bi bi-box-arrow-right"></i>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
+
+                <div class="wrapper">
+                    <div class="title-text">
+                        <div class="title login">Add Expense</div>
+                        <div class="title signup">Add Income</div>
+                    </div>
+                    <div class="form-container">
+                        <div class="slide-controls">
+                            <input type="radio" name="slide" id="login" checked>
+                            <input type="radio" name="slide" id="signup">
+                            <label for="login" class="slide login">Add Expense</label>
+                            <label for="signup" class="slide signup">Add Income</label>
+                            <div class="slider-tab"></div>
+                        </div>
+                        <div class="form-inner">
+                            <form action="#" class="login" onsubmit="handleAddIncomeExpense(event,true)">
+                                <div class="field">
+                                    <input type="date" name="date" id="date" placeholder="Date" required>
+                                </div>
+                                <div class="field">
+                                    <input type="number" name="amount" id="amount" placeholder="Enter Amount"  required>
+                                </div>
+                                <div class="field">
+                                    <select name="cat" id="cat" required >
+                                        <option value=""selected disabled hidden id="place">Select Category</option>
+                                        <option value="Food">Food</option>
+                                        <option value="Transport">Transport</option>
+                                        <option value="Household">Household</option>
+                                        <option value="Apparel">Apparel</option>
+                                        <option value="Beauty">Beauty</option>
+                                        <option value="Health">Health</option>
+                                        <option value="Grocery">Grocery</option>
+                                        <option value="Shopping">Shopping</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <input type="text" name="note" id="note" placeholder="Enter Note" required>
+                                </div>
+                                <div class="field">
+                                    <textarea name="description" id="description" placeholder="Description" required></textarea>
+                                </div>
+                                <div class="field btn">
+                                    <div class="btn-layer"></div>
+                                    <input type="submit" value="Add Expense">
+                                </div>
+                            </form>
+                            <form action="#" class="signup" onsubmit="handleAddIncomeExpense(event,false)">
+                                <div class="field">
+                                    <input type="date" name="date" id="date" placeholder="Date" required>
+                                </div>
+                                <div class="field">
+                                    <input type="number" name="amount" id="amount" placeholder="Enter Amount"  required>
+                                </div>
+                                <div class="field">
+                                    <select name="cat" id="cat" required>
+                                        <option value="" selected disabled hidden id="place">Select Category</option>
+                                        <option value="Allowance">Allowance</option>
+                                        <option value="Salary">Salary</option>
+                                        <option value="Petty Cash">Petty Cash</option>
+                                        <option value="Bonus">Bonus</option>
+                                        <option value="Contribution">Contribution</option>
+                                        <option value="Shares">Returns from Shares</option>
+                                        <option value="Others">Others</option>
+                                    </select>
+                                </div>
+                                <div class="field">
+                                    <input type="text" name="note" id="note" placeholder="Enter Note" required>
+                                </div>
+                                <div class="field">
+                                    <textarea name="description" id="description" placeholder="Description" required></textarea>
+                                </div>
+                                <div class="field btn">
+                                    <div class="btn-layer"></div>
+                                    <input type="submit" value="Add Income">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script>
+
+        const loginText = document.querySelector(".title-text .login");
+        const loginForm = document.querySelector("form.login");
+        const loginBtn = document.querySelector("label.login");
+        const signupBtn = document.querySelector("label.signup");
+        signupBtn.onclick = (() => {
+            loginForm.style.marginLeft = "-50%";
+            loginText.style.marginLeft = "-50%";
+        });
+        loginBtn.onclick = (() => {
+            loginForm.style.marginLeft = "0%";
+            loginText.style.marginLeft = "0%";
+        });
+
+
+        let user={};
+        function getUser(){
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+            
+            if(user){
+                user = users.find(user => user.userName === currentUser.userName);
+            }else{
+                window.location.href = 'login.html';
+            }
+        let user_Name_doc = document.getElementById('User_Name');
+        user_Name_doc.innerText=`Hi ${user.name}`
+        }
+        getUser();
+
+        function handleAddIncomeExpense(event,expense){
+            event.preventDefault();
+
+            let date=event.currentTarget[0].value;
+            let amount=event.currentTarget[1].value;
+            let category=event.currentTarget[2].value;
+            let note=event.currentTarget[3].value;
+            let description=event.currentTarget[4].value;
+
+            const newIncome = {
+                id:Math.random(),
+                date: date,
+                amount: amount,
+                category: category,
+                note: note,
+                description: description,
+                type:expense?"EXPENSE":'INCOME'
+            };
+
+            if(expense){
+                user.expenses.push(newIncome);
+            }else{
+                user.income.push(newIncome);
+            }
+            
+            let users = JSON.parse(localStorage.getItem('users')) || [];
+
+            let newUserList = users.filter((userObj)=>userObj.userName!=user.userName);
+
+            newUserList.push(user);
+
+            localStorage.setItem('users', JSON.stringify(newUserList));
+
+            const popUp = document.getElementById('regMessagePopUp');
+            popUp.innerText = `${expense ? "Expense" : "Income"} added successfully`;
+
+            
+            const img = document.createElement('img');
+            img.src = "checkMark.png";
+            img.width = 30;
+            img.height = 30;
+
+            
+            popUp.appendChild(img);
+            popUp.classList.add('show'); 
+            setTimeout(() => {
+                popUp.classList.remove('show'); 
+            }, 2000);
+
+        }
+
+        
+    </script>
+</body>
+
+</html>

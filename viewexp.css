@@ -109,15 +109,25 @@ header {
 }
 
 @media (min-width:461px) and (max-width: 767px){
-  
+  .card{
+    margin-top: 6%;
+    margin-left: 10%;
+  }
 }
 
 @media (min-width:768px) and (max-width:991px){
-  
+  .card{
+    width:65vw;
+    margin-left:5%;
+    margin-top: 6%;
+  }
 }
 
 @media (min-width:992px) and (max-width:1199px){
- 
+  .card{
+    margin-left: 5%;
+    width: 75vw;
+  }
 }
 
 @media (min-width:1200px){

@@ -142,7 +142,7 @@
             isValid = false;
         }
         if (password === "" || !passwordRegex.test(password)) {
-            displayError('regPassword', 'Valid Password is required');
+            displayError('regPassword', 'Valid Password is required least 1 uppercase letter, 1 special character, and 1 number and at least 6 characters');
             isValid = false;
         }
         if (password !== confirmPassword) {

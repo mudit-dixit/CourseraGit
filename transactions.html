@@ -9,12 +9,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
     <link rel="stylesheet" href="transactions.css">
-    <style>
-        .closeIcon{
-            margin-left: 10px;
-            cursor: pointer; 
-        }
-    </style>
 </head>
 <header>
     <nav class="navbar fixed-top" style="background-color: #e3f2fd;">
@@ -23,9 +17,11 @@
                 <img src="logo.svg" alt="Logo" width="60" height="30" class="d-inline-block align-text-top">
                 <span id="brand">Expense Tracker</span>
             </a>
-            <span class="navbar-text" id="User_Name">
-                Hi Isha!!
-            </span>
+            <span class="navbar-text" id="User_Name"></span>
+            <button class="navbar-toggler d-md-none" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar"
+                aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
         </div>
     </nav>
 </header>
@@ -34,9 +30,14 @@
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+            <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block sidebar collapse navbar-collapse">
                 <div class="position-sticky">
-                    <ul class="nav flex-column">
+                    <ul class="nav flex-column navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a id="invisible" class="nav-link" href="#">
+                                <i class="bi bi-house-door"></i> Dashboard
+                            </a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="homepage.html">
                                 <i class="bi bi-house-door"></i> Dashboard
@@ -99,224 +100,69 @@
                             </div>
                             <div class="col-md-4 d-flex align-items-end">
                                 <button type="button" class="btn btn-primary" onclick="getUser()">Filter</button>
-                                <button type="button" class="btn btn-secondary" style="margin-left: 10px;" onclick="clearFilter()">Clear</button>
+                                <button type="button" class="btn btn-secondary" style="margin-left: 10px;"
+                                    onclick="clearFilter()">Clear</button>
                             </div>
                         </form>
                         <div id="main">
 
                         </div>
-                        <ul id="expenseList"  class="list-group list-group-flush">
-                            <!-- <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Arun Payment</span>
-                                    <br>
-                                    <small class="text-muted">01st Sep 2024, Monday</small>
-                                    <br>
-                                    <small class="badge bg-success">Contribution</small>                
-                                </div>
-                                <span class="text-success">₹20,000</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Burger King</span>
-                                    <br>
-                                    <small class="text-muted">10th Sep 2024, Sunday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Food</small>                
-                                </div>
-                                <span class="text-danger">₹3,197</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>PVR Forum</span>
-                                    <br>
-                                    <small class="text-muted">10th Sep 2024, Sunday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Entertainment</small>                
-                                </div>
-                                <span class="text-danger">₹2,197</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Starbucks, Whitefield</span>
-                                    <br>
-                                    <small class="text-muted">12th Sep 2024, Tuesday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Food</small>
-                                </div>
-                                <span class="text-danger">₹1,500</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Big Bazaar, Indiranagar</span>
-                                    <br>
-                                    <small class="text-muted">13th Sep 2024, Wednesday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Grocery</small>
-                                </div>
-                                <span class="text-danger">₹2,000</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Pizza Hut, Koramangala</span>
-                                    <br>
-                                    <small class="text-muted">14th Sep 2024, Thursday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Food</small>
-                                </div>
-                                <span class="text-danger">₹2,400</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Sepathlon, Sarjapur</span>
-                                    <br>
-                                    <small class="text-muted">15th Sep 2024, Friday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Apparel</small>
-                                </div>
-                                <span class="text-danger">₹1,800</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Popyes</span>
-                                    <br>
-                                    <small class="text-muted">18th Sep 2024, Monday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Food</small>
-                                </div>
-                                <span class="text-danger">₹800</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Groww Pvt. Ltd.</span>
-                                    <br>
-                                    <small class="text-muted">20th Sep 2024, Wednesday</small>
-                                    <br>
-                                    <small class="badge bg-success">Returns from Shares</small>
-                                </div>
-                                <span class="text-success">₹40,000</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Decathlon, Sarjapur</span>
-                                    <br>
-                                    <small class="text-muted">23rd Sep 2024, Monday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Apparel</small>
-                                </div>
-                                <span class="text-danger">₹5,200</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Lifestyle, Forum Mall</span>
-                                    <br>
-                                    <small class="text-muted">25th Sep 2024, Wednesday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Beauty</small>
-                                </div>
-                                <span class="text-danger">₹4,600</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>KFC, Electronic City</span>
-                                    <br>
-                                    <small class="text-muted">26th Sep 2024, Thursday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Food</small>
-                                </div>
-                                <span class="text-danger">₹1,800</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Amazon Payment</span>
-                                    <br>
-                                    <small class="text-muted">27th Sep 2024, Friday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Shopping</small>
-                                </div>
-                                <span class="text-danger">₹3,400</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Uber Ride</span>
-                                    <br>
-                                    <small class="text-muted">28th Sep 2024, Saturday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Transport</small>
-                                </div>
-                                <span class="text-danger">₹700</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Zomato Order</span>
-                                    <br>
-                                    <small class="text-muted">29th Sep 2024, Sunday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Food</small>
-                                </div>
-                                <span class="text-danger">₹950</span>
-                            </li>
-                            <li class="list-group-item d-flex justify-content-between align-items-start">
-                                <div>
-                                    <span>Flipkart Purchase</span>
-                                    <br>
-                                    <small class="text-muted">30th Sep 2024, Monday</small>
-                                    <br>
-                                    <small class="badge bg-danger">Shopping</small>
-                                </div>
-                                <span class="text-danger">₹6,800</span>
-                            </li> -->
+                        <ul id="expenseList" class="list-group list-group-flush">
+
                         </ul>
                     </div>
                 </div>
             </main>
         </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 </body>
 <script>
-    
-    let user={};
+
+    let user = {};
     var totalExpense = 0;
     var totalincome = 0;
-    function getUser(){
+    function getUser() {
         const users = JSON.parse(localStorage.getItem('users')) || [];
         const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
-        
-        if(user){
+
+        if (user) {
             user = users.find(user => user.userName === currentUser.userName);
-        }else{
+        } else {
             window.location.href = 'login.html';
         }
         let user_Name_doc = document.getElementById('User_Name');
-        user_Name_doc.innerText=`Hi ${user.name}`
+        user_Name_doc.innerText = `Hi ${user.name}`
 
-        
-        let transactions = [...user.income,...user.expenses];
-        if(transactions.length>0){
-        transactions = transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
-        createTransactionList(transactions);
-        let main = document.getElementById('main');
-        main.innerHTML='';
-        }else{
+
+        let transactions = [...user.income, ...user.expenses];
+        if (transactions.length > 0) {
+            transactions = transactions.sort((a, b) => new Date(b.date) - new Date(a.date));
+            createTransactionList(transactions);
+            let main = document.getElementById('main');
+            main.innerHTML = '';
+        } else {
             showNoData();
         }
-      }
+    }
     getUser();
-       
-    function clearFilter(){
+
+    function clearFilter() {
         window.location.reload();
     }
 
-    
+
     function createTransactionList(transactions) {
         const ul = document.getElementById('expenseList');
         const minDate = document.getElementById('startDate').value;
         const maxDate = document.getElementById('endDate').value;
-        ul.innerHTML=''
+        ul.innerHTML = ''
         transactions.forEach(transaction => {
             const transactionDate = new Date(transaction.date);
             const startDate = new Date(minDate);
             const endDate = new Date(maxDate);
-            if ((transactionDate >= startDate && transactionDate <= endDate)||(minDate==''||maxDate=='')) {
+            if ((transactionDate >= startDate && transactionDate <= endDate) || (minDate == '' || maxDate == '')) {
                 // Create the list item
                 const li = document.createElement('li');
                 li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-start');
@@ -350,10 +196,10 @@
                 amountSpan.classList.add(transaction.type === 'INCOME' ? 'text-success' : 'text-danger');
                 amountSpan.innerText = `₹${transaction.amount.toLocaleString()}`;
                 let closeIcon = document.createElement('img');
-                closeIcon.src='close.png'
-                closeIcon.width = 15; 
+                closeIcon.src = 'close.png'
+                closeIcon.width = 15;
                 closeIcon.classList.add('closeIcon')
-                closeIcon.addEventListener("click", () => handleDelete(transaction.id,transaction.type === 'INCOME' ? false : true));
+                closeIcon.addEventListener("click", () => handleDelete(transaction.id, transaction.type === 'INCOME' ? false : true));
                 closeIcon.height = 15
                 amountSpan.appendChild(closeIcon);
                 // Append the div and amount to the list item
@@ -364,19 +210,19 @@
                 ul.appendChild(li);
             }
         });
-        
+
     }
-    
-    function handleDelete(id,expense){
+
+    function handleDelete(id, expense) {
         console.log(id);
 
         let users = JSON.parse(localStorage.getItem('users')) || [];
 
-        let newUserList = users.filter((userObj)=>userObj.userName!=user.userName);
-        if(expense){
-        user.expenses=user.expenses.filter((expense)=>expense.id!=id);
-        }else{
-        user.income=user.income.filter((income)=>income.id!=id);
+        let newUserList = users.filter((userObj) => userObj.userName != user.userName);
+        if (expense) {
+            user.expenses = user.expenses.filter((expense) => expense.id != id);
+        } else {
+            user.income = user.income.filter((income) => income.id != id);
         }
         newUserList.push(user);
 
@@ -385,14 +231,14 @@
 
     }
 
-    function showNoData(){
+    function showNoData() {
         let main = document.getElementById('main');
 
-        let expenseListDIV =document.createElement('div');
+        let expenseListDIV = document.createElement('div');
 
-        expenseListDIV.classList.add('card', 'col-lg-12');
+        expenseListDIV.classList.add( 'col-lg-12');
 
-        expenseListDIV.innerHTML=`<div style="height: 55vh;
+        expenseListDIV.innerHTML = `<div style="height: 30vh;
                                             display: flex;
                                             align-items: center;
                                             justify-content: center;">
@@ -400,6 +246,7 @@
                                     <h1>No Data to Show</h1></div>`
 
         main.appendChild(expenseListDIV);
-      }
+    }
 </script>
+
 </html>

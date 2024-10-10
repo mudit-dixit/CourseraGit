@@ -6,65 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Expense Tracking System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="login.css">
-    <style>
-        .input-error {
-            border: 1px solid red;
-        }
-
-        .error-message {
-            color: red;
-            font-size: 12px;
-            margin-top: 5px;
-            color: #000000;
-            text-align: center;
-            font-size: x-small;
-        }
-
-        .login-error-message {
-            color: red;
-            font-size: 12px;
-            margin-top: 5px;
-            color: #eee;
-            text-align: center;
-            font-size: x-small;
-        }
-
-        input:focus {
-            border-color: initial;
-        }
-
-        input{
-
-            margin: 5px auto;
-
-        }
-
-        .popUp {
-        position: absolute;
-        height: 25vh;
-        width: 25vw;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%); 
-        background: azure;
-        border: #000000 solid 1px;
-        border-radius: 10px;
-        opacity: 0; 
-        visibility: hidden; 
-        transition: opacity 0.5s ease, visibility 0.5s ease; 
-        justify-content: center; 
-        align-items: center;
-        flex-direction: column;
-        display: flex; 
-        }
-
-        .popUp.show {
-            opacity: 1; 
-            visibility: visible; 
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="tlogin.css">
 </head>
 
 <header>
@@ -78,191 +20,254 @@
     </nav>
 </header>
 
-<body style="position: relative;">
-    
+<body>
     <div id="regMessagePopUp" class="popUp"><h2>Registered successfully</h2><img src="checkMark.png" width="30" height="30"> </div>
-    <div class="main">
-        <input type="checkbox" id="chk" aria-hidden="true">
+    <div class="login-wrap">
+        <div class="login-html">
+            <!--div class="tab"-->
+            <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign
+                In</label>
+            <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
+            <!--/div-->
+            <div class="login-form">
+                <div class="sign-in-htm">
+                    <form onsubmit="handleLogin(event)">
+                        <div class="group">
+                            <input id="loginEmail" type="text" class="input" placeholder="Enter Email ID">
+                            <div id="loginEmailError" class="login-error-message">Email is required.</div>
+                        </div>
+                        <div class="group">
+                            <input id="loginPassword" type="password" class="input" data-type="password"
+                                placeholder="Enter Password">
+                            <div id="loginPasswordError" class="login-error-message">Password is required.</div>
 
-        <div class="register">
-            <form onsubmit="handleRegister(event)">
-                <label for="chk" aria-hidden="true">SignUp</label>
-                <input type="text" id="regName" placeholder="User name">
-                <div id="regNameError" class="error-message">Name is required.</div>
-
-                <input id="regEmail" placeholder="Email">
-                <div id="regEmailError" class="error-message">Valid email is required.</div>
-
-                <input type="password" id="regPassword" placeholder="Password">
-                <div id="regPasswordError" class="error-message">Password is required.</div>
-
-                <input type="password" id="regConfirmPassword" placeholder="Confirm Password">
-                <div id="regConfirmPasswordError" class="error-message">Passwords must match.</div>
-                
-                <button type="submit">Register</button>
-            </form>
-        </div>
-
-        <div class="login">
-            <form onsubmit="handleLogin(event)">
-                <label for="chk" aria-hidden="true">Login</label>
-                <input type="text" id="loginEmail" placeholder="Email">
-                <div id="loginEmailError" class="login-error-message">Email is required.</div>
-
-                <input type="password" id="loginPassword" placeholder="Password">
-                <div id="loginPasswordError" class="login-error-message">Password is required.</div>
-
-                <button type="submit">Login</button>
-                <div id="loginMessage" style="color: red;text-align: center; "></div>
-            </form>
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button" value="Sign In">
+                            <div id="loginMessage" style="color: red;text-align: center; "></div>
+                        </div>
+                    </form>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <a href="forgetPassword.html">Forgot Password?</a>
+                    </div>
+                </div>
+                <div class="sign-up-htm">
+                    <form onsubmit="handleRegister(event)">
+                        <div class="group">
+                            <input id="regName" type="text" class="input" placeholder="Enter Username">
+                            <div id="regNameError" class="error-message">Name is required.</div>
+                        </div>
+                        <div class="group">
+                            <input id="regEmail" type="text" class="input" placeholder="Enter Email Address">
+                            <div id="regEmailError" class="error-message">Valid email is required.</div>
+                        </div>
+                        <div class="group">
+                            <input id="regPassword" type="password" class="input" data-type="password"
+                                placeholder="Enter Password">
+                            <div id="regPasswordError" class="error-message">Password is required.</div>
+                        </div>
+                        <div class="group">
+                            <input id="regConfirmPassword" type="password" class="input" data-type="password"
+                                placeholder="Enter Confirm Password">
+                            <div id="regConfirmPasswordError" class="error-message">Passwords must match.</div>
+                        </div>
+                        <div class="group">
+                            <select id="SecurityQuestion" class="select">
+                                <option value="" selected disabled Hidden>Select Security Question</option>
+                                <option value="What is your mother's maiden name?">What is your mother's maiden name?
+                                </option>
+                                <option value="What city were you born in?">What city were you born in?</option>
+                                <option value="What was your favorite school teacher's name?">What was your favorite
+                                    school teacher's name?</option>
+                                <option value="What's your favorite movie?">What's your favorite movie?</option>
+                                <option value="What sport do you prefer the most?">What sport do you prefer the most?
+                                </option>
+                            </select>
+                            <div id="SecurityQuestionError" class="error-message">Passwords must match.</div>
+                        
+                        </div>
+                        <div class="group">
+                            <input id="SecurityAnswer" type="text" class="input" placeholder="Enter Security Asswer">
+                            <div id="SecurityAnswerError" class="error-message">Passwords must match.</div>
+                        
+                        </div>
+                        <div class="group">
+                            <input type="submit" class="button" value="Sign Up">
+                        </div>
+                    </form>
+                    <div class="hr"></div>
+                    <div class="foot-lnk">
+                        <label for="tab-1">Already Member?</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
     </script>
+
+
 </body>
 
 <script>
 
-function handleRegister(event) {
-    event.preventDefault();
-    let isValid = true;
-
-    const name = document.getElementById('regName').value;
-    const email = document.getElementById('regEmail').value;
-    const password = document.getElementById('regPassword').value;
-    const confirmPassword = document.getElementById('regConfirmPassword').value;
-
-    // Clear error messages and reset input styles
-    clearErrors(['regName', 'regEmail', 'regPassword', 'regConfirmPassword']);
-
-    // Basic regex for email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    // Regex for password validation: at least 1 uppercase letter, 1 special character, and 1 number
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/; // at least 6 characters
-
-    if (name === "") {
-        displayError('regName', 'Name is required.');
-        isValid = false;
-    }
-    if (email === "" || !emailRegex.test(email)) {
-        displayError('regEmail', 'Valid email is required.');
-        isValid = false;
-    }
-    if (password === "" || !passwordRegex.test(password)) {
-        displayError('regPassword', 'Valid Password is required');
-        isValid = false;
-    }
-    if (password !== confirmPassword) {
-        displayError('regConfirmPassword', 'Passwords must match.');
-        isValid = false;
-    }
-
-    if (!isValid) return; // Stop the function if validation fails
-
-    // Check if the email is already registered
-    let users = JSON.parse(localStorage.getItem('users')) || [];
-    const userExists = users.some(user => user.userName === email);
-
-    if (userExists) {
-        displayError('regEmail', "Email already registered!");
-        return;
-    }
-
-    // Save the new user in local storage
-    const newUser = {
-        name: name,
-        userName: email,
-        password: password,
-        expenses: [],
-        income: []
-    };
-
-    users.push(newUser);
-    localStorage.setItem('users', JSON.stringify(users));
-
-    const popUp = document.getElementById('regMessagePopUp');
-    popUp.classList.add('show'); // Trigger fade-in
-    setTimeout(() => {
-        popUp.classList.remove('show'); 
-    }, 2000);
-
-    document.getElementById('regName').value = "";
-    document.getElementById('regEmail').value = "";
-    document.getElementById('regPassword').value = "";
-    document.getElementById('regConfirmPassword').value = "";
-}
-
-
-    function handleLogin(event) {
+    function handleRegister(event) {
         event.preventDefault();
         let isValid = true;
-
-        const email = document.getElementById('loginEmail').value;
-        const password = document.getElementById('loginPassword').value;
-
-        
-        clearErrors(['loginEmail', 'loginPassword']);
-
-        if (email === "") {
-            displayError('loginEmail', 'Email is required.');
+    
+        const name = document.getElementById('regName').value;
+        const email = document.getElementById('regEmail').value;
+        const password = document.getElementById('regPassword').value;
+        const confirmPassword = document.getElementById('regConfirmPassword').value;
+        const secQuestion= document.getElementById('SecurityQuestion').value;
+        const secAnswer= document.getElementById('SecurityAnswer').value;
+    
+        // Clear error messages and reset input styles
+        clearErrors(['regName', 'regEmail', 'regPassword', 'regConfirmPassword','SecurityQuestion','SecurityAnswer']);
+    
+        // Basic regex for email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        // Regex for password validation: at least 1 uppercase letter, 1 special character, and 1 number
+        const passwordRegex = /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{6,}$/; // at least 6 characters
+    
+        if (name === "") {
+            displayError('regName', 'Name is required.');
             isValid = false;
         }
-        if (password === "") {
-            displayError('loginPassword', 'Password is required.');
+        if (email === "" || !emailRegex.test(email)) {
+            displayError('regEmail', 'Valid email is required.');
             isValid = false;
         }
-
+        if (password === "" || !passwordRegex.test(password)) {
+            displayError('regPassword', 'Valid Password is required');
+            isValid = false;
+        }
+        if (password !== confirmPassword) {
+            displayError('regConfirmPassword', 'Passwords must match.');
+            isValid = false;
+        }
+        if (secQuestion == '') {
+            displayError('SecurityQuestion', 'Please  select a Security Question');
+            isValid = false;
+        }
+        if (secAnswer == '') {
+            displayError('SecurityAnswer', 'Please Enter a Security Answer');
+            isValid = false;
+        }
+    
         if (!isValid) return; // Stop the function if validation fails
-
-        // Fetch users from local storage
-        const users = JSON.parse(localStorage.getItem('users')) || [];
-
-        // Validate login credentials
-        const validUser = users.find(user => user.userName === email && user.password === password);
-
-        if (validUser) {
-            document.getElementById('loginMessage').style.color = "green";
-            document.getElementById('loginMessage').textContent = "Login successful!";
-            const currentUser={
-                userName:email,
-                name:validUser.name
-            }
-            localStorage.setItem('currentUser', JSON.stringify(currentUser));
-            window.location.href = 'homepage.html'; // Redirect to homepage
-        } else {
-            document.getElementById('loginMessage').textContent = "Invalid email or password!";
+    
+        // Check if the email is already registered
+        let users = JSON.parse(localStorage.getItem('users')) || [];
+        const userExists = users.some(user => user.userName === email);
+    
+        if (userExists) {
+            displayError('regEmail', "Email already registered!");
+            return;
         }
-    }
+    
+        // Save the new user in local storage
+        const newUser = {
+            name: name,
+            userName: email,
+            password: password,
+            securityQuestion: secQuestion,
+            securityAnswer: secAnswer,
+            expenses: [],
+            income: [],
+        };
+    
+        users.push(newUser);
+        localStorage.setItem('users', JSON.stringify(users));
+    
+        const popUp = document.getElementById('regMessagePopUp');
+        popUp.classList.add('show'); // Trigger fade-in
+        setTimeout(() => {
+            popUp.classList.remove('show'); 
+        }, 2000);
+    
+        document.getElementById('regName').value = "";
+        document.getElementById('regEmail').value = "";
+        document.getElementById('regPassword').value = "";
+        document.getElementById('regConfirmPassword').value = "";
+        document.getElementById('SecurityQuestion').value = "";
+        document.getElementById('SecurityAnswer').value = "";
 
-   
-    function displayError(inputId, message) {
-        const inputElement = document.getElementById(inputId);
-        const errorElement = document.getElementById(inputId + 'Error');
-        inputElement.classList.add('input-error');
-        errorElement.style.display = 'block';
-        errorElement.textContent = message;
-        errorElement.style.color = 'red'; 
-        
-        inputElement.addEventListener('focus', function () {
-            inputElement.classList.remove('input-error');
-            errorElement.style.color = (inputId.includes('login') ? '#eee' : '#000000'); 
+    }
+    
+    
+        function handleLogin(event) {
+            event.preventDefault();
+            let isValid = true;
+    
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+    
             
-        });
-    }
-
-   
-    function clearErrors(inputIds) {
-        inputIds.forEach(inputId => {
+            clearErrors(['loginEmail', 'loginPassword']);
+    
+            if (email === "") {
+                displayError('loginEmail', 'Email is required.');
+                isValid = false;
+            }
+            if (password === "") {
+                displayError('loginPassword', 'Password is required.');
+                isValid = false;
+            }
+    
+            if (!isValid) return; // Stop the function if validation fails
+    
+            // Fetch users from local storage
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+    
+            // Validate login credentials
+            const validUser = users.find(user => user.userName === email && user.password === password);
+    
+            if (validUser) {
+                document.getElementById('loginMessage').style.color = "green";
+                document.getElementById('loginMessage').textContent = "Login successful!";
+                const currentUser={
+                    userName:email,
+                    name:validUser.name
+                }
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                window.location.href = 'homepage.html'; // Redirect to homepage
+            } else {
+                document.getElementById('loginMessage').textContent = "Invalid email or password!";
+            }
+        }
+    
+       
+        function displayError(inputId, message) {
             const inputElement = document.getElementById(inputId);
             const errorElement = document.getElementById(inputId + 'Error');
-            inputElement.classList.remove('input-error');
-            errorElement.style.color = (inputId.includes('login') ? '#eee' : '#000000'); 
-        });
-    }
+            inputElement.classList.add('input-error');
+            errorElement.style.display = 'block';
+            errorElement.textContent = message;
+            errorElement.style.color = 'red'; 
+            
+            inputElement.addEventListener('focus', function () {
+                inputElement.classList.remove('input-error');
+                errorElement.style.color = (inputId.includes('login') ? 'rgba(0, 0, 0, 0)' : 'rgba(0, 0, 0, 0)'); 
+                
+            });
+        }
+    
+       
+        function clearErrors(inputIds) {
+            inputIds.forEach(inputId => {
+                const inputElement = document.getElementById(inputId);
+                const errorElement = document.getElementById(inputId + 'Error');
+                inputElement.classList.remove('input-error');
+                errorElement.style.color = (inputId.includes('login') ? 'rgba(0, 0, 0, 0)' : 'rgba(0, 0, 0, 0)'); 
+            });
+        }
+    
+    </script> 
 
 
-</script>
 
 </html>

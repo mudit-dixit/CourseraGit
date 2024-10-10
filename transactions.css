@@ -4,6 +4,10 @@
     box-sizing: border-box;
 }
 
+.navbar-brand{
+  cursor:default;
+}
+
 #brand{
     font-size: 150%;
     font-weight: bolder;
@@ -25,10 +29,12 @@
 }
 
 .sidebar {
-  margin-top: 2%;
-  height: 90vh;
+  margin-top: -12px;
+  height: 100vh;
+  min-width: 210px;
   background-color: #e3f2fd;
   position: fixed;
+  z-index: 1;
 }
   .sidebar .nav-link {
     color: black;
@@ -37,9 +43,23 @@
   .sidebar .nav-link:hover {
     background-color: #97c9ff;
   }
+
+  #invisible{
+    color: #e3f2fd;
+  }
+  #invisible:hover{
+    background-color: #e3f2fd;
+    color: #e3f2fd;
+  }
+
   .bi{
     margin-right: 10px;
   }
+
+  .bottom-0{
+    margin-bottom: 10px;
+  }
+
   #lgout{
     color: red;
   }
@@ -68,12 +88,55 @@ header {
     background-color: #fff;
     padding: 12px;
     margin: 0.3%;
+    width: 80vw;
     margin-top: 3%;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     flex: 1;
 }
 
+.closeIcon{
+  margin-left: 10px;
+  cursor: pointer; 
+}
+
 .card .text-success,.text-danger{
     font-size: larger;
+}
+@media(max-width:460px){
+  #brand{
+    font-size: medium;
+    margin: 0;
+  }
+
+  .card{
+    margin-top: 6%;
+    margin-left: 10%;
+  }
+}
+
+@media (min-width:461px) and (max-width: 767px){
+  .card{
+    margin-top: 6%;
+    margin-left: 10%;
+  }
+}
+
+@media (min-width:768px) and (max-width:991px){
+  .card{
+    width:65vw;
+    margin-left:5%;
+    margin-top: 6%;
+  }
+}
+
+@media (min-width:992px) and (max-width:1199px){
+  .card{
+    margin-left: 5%;
+    width: 75vw;
+  }
+}
+
+@media (min-width:1200px){
+
 }

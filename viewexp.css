@@ -31,11 +31,13 @@
   background-color: #e3f2fd;
   position: fixed;
   z-index: 1;
+  padding: 0%;
 }
 
   .sidebar .nav-link {
     color: black;
     font-size: 125%;
+    padding: 5%;
   }
   .sidebar .nav-link:hover {
     background-color:  #97c9ff;

@@ -36,7 +36,7 @@ font-weight: bold;
 .sidebar .nav-link {
   color: black;
   font-size: 125%;
-  padding: 5%;
+  padding: 2%;
 }
 .sidebar .nav-link:hover {
   background-color: #97c9ff;

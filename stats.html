@@ -13,7 +13,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body>
+
 
     <header>
         <nav class="navbar fixed-top" style="background-color: #e3f2fd;">
@@ -31,7 +31,7 @@
         </nav>
     </header>
     
-    <body style="display: flex;flex-direction: column;gap: 20px;">
+    <body style="display: flex;flex-direction: column;">
         <div class="container-fluid">
             <div class="row">
                 <!-- Sidebar -->
@@ -67,8 +67,8 @@
                                     <i class="bi bi-cash-coin"></i>View Expenses
                                 </a>
                             </li>
-                            <li class="nav-item active">
-                                <a class="nav-link" href="stats.html">
+                            <li class="nav-item ">
+                                <a class="nav-link active" href="stats.html">
                                     <i class="bi bi-bar-chart"></i>Statistics
                                 </a>
                             </li>
@@ -78,7 +78,7 @@
                     <div class="position-absolute bottom-0 w-95">
                         <ul class="nav flex-column mb-3">
                             <li class="nav-item" id="logout">
-                                <a class="nav-link" href="login.html">
+                                <a class="nav-link" style="margin-bottom: 10%;"  href="login.html">
                                     <span id="lgout"><i class="bi bi-box-arrow-right"></i>Logout</span>
                                 </a>
                             </li>
@@ -158,13 +158,13 @@
                         label: 'Income',
                         data: [20000, 0, 0, 0, 0, 0, 0, 40000, 0, 0, 0, 0, 0, 0, 0],
                         backgroundColor: 'green',  // Set income bars to green
-                        borderWidth: 1
+                        borderWidth: 1,
                     },
                     {
                         label: 'Expenses',
                         data: [8800, 3197, 1500, 2000, 2400, 1800, 800, 0, 5200, 4600, 1800, 3400, 700, 950, 6800],
                         backgroundColor: 'red',  // Set expenses bars to red
-                        borderWidth: 1
+                        borderWidth: 1,
                     }]
                 },
                 options: {
@@ -238,13 +238,15 @@
                             label: 'Income',
                             data: incomeData,
                             backgroundColor: 'green',
-                            borderWidth: 1
+                            borderWidth: 1,
+                            maxBarThickness: 30
                         },
                         {
                             label: 'Expenses',
                             data: expensesData,
                             backgroundColor: 'red',
-                            borderWidth: 1
+                            borderWidth: 1,
+                            maxBarThickness: 30
                         }
                     ]
                 };

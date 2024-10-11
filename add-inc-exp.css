@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
 }
 
 #brand {
@@ -16,9 +15,7 @@
   font-weight: bolder;
 }
 
-.navbar{
-  z-index: 10;
-}
+
 
 .navbar-text {
   font-weight: bold;
@@ -51,7 +48,7 @@
 .sidebar .nav-link {
   color: black;
   font-size: 125%;
-  padding: 5%;
+  padding: 2%;
 }
 
 .sidebar .nav-link:hover {

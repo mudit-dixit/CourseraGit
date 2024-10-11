@@ -121,7 +121,7 @@
     </nav>
 </header>
 
-<body>
+<body style="display: flex;flex-direction: column;">
     <div id="regMessagePopUp" class="popUp"><h2>Added successfully</h2><img src="checkMark.png" width="30" height="30"> </div>
     
     
@@ -141,8 +141,8 @@
                                 <i class="bi bi-house-door"></i> Dashboard
                             </a>
                         </li>
-                        <li class="nav-item active">
-                            <a class="nav-link" href="add-inc-exp.html">
+                        <li class="nav-item ">
+                            <a class="nav-link active"  href="add-inc-exp.html">
                                 <i class="bi bi-plus-circle"></i>Add Inc/Exp
                             </a>
                         </li>
@@ -172,7 +172,7 @@
                 <div class="position-absolute bottom-0 w-95">
                     <ul class="nav flex-column mb-3">
                         <li class="nav-item" id="logout">
-                            <a class="nav-link" href="login.html">
+                            <a class="nav-link" style="margin-bottom: 10%;" href="login.html">
                                 <span id="lgout"><i class="bi bi-box-arrow-right"></i>Logout</span>
                             </a>
                         </li>
@@ -194,7 +194,7 @@
                             <div class="slider-tab"></div>
                         </div>
                         <div class="form-inner">
-                            <form action="#" class="login" onsubmit="handleAddIncomeExpense(event,true)">
+                            <form action="#" id="ExpenseForm" class="login" onsubmit="handleAddIncomeExpense(event,true)">
                                 <div class="field">
                                     <input type="date" name="date" id="date" placeholder="Date" required>
                                 </div>
@@ -226,7 +226,7 @@
                                     <input type="submit" value="Add Expense">
                                 </div>
                             </form>
-                            <form action="#" class="signup" onsubmit="handleAddIncomeExpense(event,false)">
+                            <form action="#" id="IncomeForm" class="signup" onsubmit="handleAddIncomeExpense(event,false)">
                                 <div class="field">
                                     <input type="date" name="date" id="date" placeholder="Date" required>
                                 </div>
@@ -273,10 +273,12 @@
         signupBtn.onclick = (() => {
             loginForm.style.marginLeft = "-50%";
             loginText.innerText='Add Income';
+            resetForms();
         });
         loginBtn.onclick = (() => {
             loginForm.style.marginLeft = "0%";
             loginText.innerText='Add Expense';
+            resetForms();
            
         });
 
@@ -295,6 +297,14 @@
         user_Name_doc.innerText=`Hi ${user.name}`
         }
         getUser();
+
+        function resetForms() {
+            // Reset Expense Form
+            document.getElementById('ExpenseForm').reset();
+
+            // Reset Income Form
+            document.getElementById('IncomeForm').reset();
+        }
 
         function handleAddIncomeExpense(event,expense){
             event.preventDefault();
@@ -344,7 +354,7 @@
             setTimeout(() => {
                 popUp.classList.remove('show'); 
             }, 2000);
-
+            resetForms();
         }
 
         

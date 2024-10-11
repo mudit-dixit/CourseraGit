@@ -36,7 +36,7 @@
   .sidebar .nav-link {
     color: black;
     font-size: 125%;
-    padding: 5%;
+    padding: 2%;
   }
   .sidebar .nav-link:hover {
     background-color: #97c9ff;
@@ -110,7 +110,6 @@ header {
 @media (min-width:461px) and (max-width: 767px){
   .card{
     margin-top: 6%;
-    margin-left: 10%;
   }
 }
 

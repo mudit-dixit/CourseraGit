@@ -25,7 +25,7 @@ font-weight: bold;
 }
 
 .sidebar {
-  margin-top: -12px;
+  margin-top: -50px;
   height: 100vh;
   min-width: 210px;
   background-color: #e3f2fd;
@@ -36,7 +36,7 @@ font-weight: bold;
 .sidebar .nav-link {
   color: black;
   font-size: 125%;
-  padding: 2%;
+  padding: 15px;
 }
 .sidebar .nav-link:hover {
   background-color: #97c9ff;
@@ -62,8 +62,12 @@ font-weight: bold;
   color: red;
 }
 
-#logout{
-  width: 230px;
+#logout {
+  width: 250px;
+}
+
+#logout:hover {
+  width: 250px;
 }
 
 .main-content {

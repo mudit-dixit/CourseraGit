@@ -25,7 +25,7 @@
 }
 
 .sidebar {
-  margin-top: -12px;
+  margin-top: -50px;
   height: 100vh;
   min-width: 210px;
   background-color: #e3f2fd;
@@ -37,7 +37,7 @@
   .sidebar .nav-link {
     color: black;
     font-size: 125%;
-    padding: 2%;
+    padding: 15px;
   }
   .sidebar .nav-link:hover {
     background-color:  #97c9ff;
@@ -63,8 +63,12 @@
     color: red;
   }
 
-  #logout{
-    width: 230px;
+  #logout {
+    width: 255px;
+  }
+  
+  #logout:hover {
+    width: 255px;
   }
   
 .main-content {
@@ -111,6 +115,7 @@ header {
 @media (min-width:461px) and (max-width: 767px){
   .card{
     margin-top: 6%;
+    /* margin-left: 10%; */
   }
 }
 

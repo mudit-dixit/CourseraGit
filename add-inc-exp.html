@@ -162,7 +162,7 @@
                         </li>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="stats.html">
                                 <i class="bi bi-bar-chart"></i>Statistics
                             </a>
                         </li>
@@ -179,7 +179,12 @@
                     </ul>
                 </div>
             </nav>
+            <div class="text-end mt-4" style="margin-right: 10px; padding-top: 30px;">
+                <button id="readAloudButton" class="btn btn-primary" hidden>Read Aloud</button>
+                <p><small>Shortcut: Press <strong>Ctrl + b</strong> to activate Read Aloud</small></p>
+            </div>
             <main class="col-md-9 ms-sm-auto col-lg-10 content" style="display: flex; justify-content: center;">
+                
 
                 <div class="wrapper">
                     <div class="title-text">
@@ -219,7 +224,7 @@
                                     <input type="text" name="note" id="note" placeholder="Enter Note" required>
                                 </div>
                                 <div class="field">
-                                    <textarea name="description" id="description" placeholder="Description" required></textarea>
+                                    <textarea name="description" id="description" placeholder="Description" ></textarea>
                                 </div>
                                 <div class="field btn">
                                     <div class="btn-layer"></div>
@@ -249,7 +254,7 @@
                                     <input type="text" name="note" id="note" placeholder="Enter Note" required>
                                 </div>
                                 <div class="field">
-                                    <textarea name="description" id="description" placeholder="Description" required></textarea>
+                                    <textarea name="description" id="description" placeholder="Description" ></textarea>
                                 </div>
                                 <div class="field btn">
                                     <div class="btn-layer"></div>
@@ -355,8 +360,65 @@
                 popUp.classList.remove('show'); 
             }, 2000);
             resetForms();
+
         }
 
+        // Function to check if the Add Expense or Add Income form is active and read the data accordingly
+        function speakFormData() {
+            // Cancel any ongoing speech first to restart from the beginning
+            window.speechSynthesis.cancel();
+
+            // Get which form is currently selected (Add Expense or Add Income)
+            const loginRadio = document.getElementById('login');
+            const isExpense = loginRadio.checked; // If 'login' is checked, it's the Add Expense form.
+
+            // Now based on which form is active, gather the respective data
+            let date, amount, category, note, description;
+
+            if (isExpense) {
+                // Add Expense form is active
+                date = document.querySelector('form.login #date').value || "No date selected";
+                amount = document.querySelector('form.login #amount').value || "No amount entered";
+                category = document.querySelector('form.login #cat').value || "No category selected";
+                note = document.querySelector('form.login #note').value || "No note entered";
+                description = document.querySelector('form.login #description').value || "No description provided";
+            } else {
+                // Add Income form is active
+                date = document.querySelector('form.signup #date').value || "No date selected";
+                amount = document.querySelector('form.signup #amount').value || "No amount entered";
+                category = document.querySelector('form.signup #cat').value || "No category selected";
+                note = document.querySelector('form.signup #note').value || "No note entered";
+                description = document.querySelector('form.signup #description').value || "No description provided";
+            }
+
+            // Construct the text to be spoken based on the active form
+            const textToSpeak = `
+        Here is the information you have entered: 
+        Date: ${date}, 
+        Amount: ${amount}, 
+        Category: ${category}, 
+        Note: ${note}, 
+        Description: ${description}.
+    `;
+
+            // Use the SpeechSynthesis API for text-to-speech
+            const speechSynthesis = window.speechSynthesis;
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+
+            // Speak the text
+            speechSynthesis.speak(utterance);
+        }
+
+        // Add keyboard shortcut (Ctrl + R) to trigger the reading of form data
+        document.addEventListener('keydown', (event) => {
+            if (event.ctrlKey && event.key === 'b') {
+                event.preventDefault();  // Prevent default browser behavior (if any)
+                speakFormData();  // Restart speech when Ctrl+R is pressed
+            }
+        });
+
+        // Add a button click event listener to restart the speech when the button is pressed
+        document.getElementById('ttsFormBtn').addEventListener('click', speakFormData);
         
     </script>
 </body>

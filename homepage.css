@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
 
 .navbar-brand {
@@ -34,7 +35,7 @@ a {
 }
 
 .sidebar {
-  margin-top: -12px;
+  margin-top: -50px;
   height: 100vh;
   min-width: 210px;
   background-color: #e3f2fd;
@@ -46,7 +47,8 @@ a {
 .sidebar .nav-link {
   color: black;
   font-size: 125%;
-  padding: 2%;}
+  padding: 15px;
+}
 
 .sidebar .nav-link:hover {
   background-color: #97c9ff;
@@ -62,7 +64,7 @@ a {
 }
 
 .bi {
-  margin-right: 5px;
+  margin-right: 10px;
 }
 
 .bottom-0 {
@@ -71,6 +73,14 @@ a {
 
 #lgout {
   color: red;
+}
+
+#logout {
+  width: 250px;
+}
+
+#logout:hover {
+  width: 250px;
 }
 
 .content {
@@ -105,6 +115,7 @@ header {
   background-color: #fff;
   padding: 12px;
   margin: 0.3%;
+  margin-bottom: 10px;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   flex: 1;
@@ -116,11 +127,7 @@ header {
   font-size: larger;
 }
 
-.speakbutton{
-  margin-left: 18%;
-}
-
-@media(max-width:460px) {
+@media(max-width:476px) {
   #brand {
     font-size: medium;
     margin: 0;
@@ -136,7 +143,7 @@ header {
   }
 }
 
-@media (min-width:461px) and (max-width: 767px) {
+@media (min-width:477px) and (max-width: 767px) {
   .cards {
     display: table-row;
   }
@@ -144,11 +151,6 @@ header {
   .card {
     width: 85vw;
     margin-bottom: 20px;
-  }
-
-  .speakbutton{
-    margin-left: auto;
-    margin-right: auto;
   }
 }
 

@@ -26,7 +26,7 @@
     </nav>
 </header>
 
-<body style="display: flex;flex-direction: column;">
+<body style="display: flex;flex-direction: column;gap: 20px;">
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
@@ -74,7 +74,7 @@
                 <div class="position-absolute bottom-0 w-95">
                     <ul class="nav flex-column mb-3">
                         <li class="nav-item" id="logout">
-                            <a class="nav-link" style="margin-bottom: 10%;"  href="login.html">
+                            <a class="nav-link" href="login.html">
                                 <span id="lgout"><i class="bi bi-box-arrow-right"></i>Logout</span>
                             </a>
                         </li>
@@ -82,6 +82,10 @@
                 </div>
             </nav>
 
+            <div class="text-end mt-4" style="margin-right: 10px; padding-top: 30px;">
+                <button id="readAloudButton" class="btn btn-primary" hidden>Read Aloud</button>
+                <p><small>Shortcut: Press <strong>Ctrl + b</strong> to activate Read Aloud</small></p>
+            </div>
             <main class="col-md-9 ms-sm-auto col-lg-10 px-md-6 content" id="main">
             </main>
         </div>
@@ -236,6 +240,38 @@
         main.appendChild(expenseListDIV);
     }
 
+    // Text-to-Speech Functionality
+    const readAloudButton = document.getElementById('readAloudButton');
+    let utterance;
+
+    // Function to stop and restart the speech
+    function startSpeech() {
+        const content = document.getElementById('main').innerText; // Get the text content of the main area
+
+        // If any speech is ongoing, stop it immediately
+        window.speechSynthesis.cancel();  // Stop any ongoing speech
+
+        // Create a new SpeechSynthesisUtterance instance for the new content
+        utterance = new SpeechSynthesisUtterance(content);
+
+        // When the speech is finished, reset utterance
+        utterance.onend = function () {
+            console.log('Speech has ended');
+        };
+
+        // Speak the content
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // Event listener for the "Read Aloud" button
+    readAloudButton.addEventListener('click', startSpeech);
+
+    // Add keyboard shortcut (Ctrl + R) to trigger text-to-speech
+    document.addEventListener('keydown', function (event) {
+        if (event.ctrlKey && event.key === 'b') {  // Ctrl + R to activate
+            startSpeech();
+        }
+    });
 
 
 </script>

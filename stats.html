@@ -31,7 +31,7 @@
         </nav>
     </header>
     
-    <body style="display: flex;flex-direction: column;">
+    <body style="display: flex;flex-direction: column;gap: 20px;">
         <div class="container-fluid">
             <div class="row">
                 <!-- Sidebar -->
@@ -78,7 +78,7 @@
                     <div class="position-absolute bottom-0 w-95">
                         <ul class="nav flex-column mb-3">
                             <li class="nav-item" id="logout">
-                                <a class="nav-link" style="margin-bottom: 10%;"  href="login.html">
+                                <a class="nav-link" href="login.html">
                                     <span id="lgout"><i class="bi bi-box-arrow-right"></i>Logout</span>
                                 </a>
                             </li>
@@ -158,13 +158,13 @@
                         label: 'Income',
                         data: [20000, 0, 0, 0, 0, 0, 0, 40000, 0, 0, 0, 0, 0, 0, 0],
                         backgroundColor: 'green',  // Set income bars to green
-                        borderWidth: 1,
+                        borderWidth: 1
                     },
                     {
                         label: 'Expenses',
                         data: [8800, 3197, 1500, 2000, 2400, 1800, 800, 0, 5200, 4600, 1800, 3400, 700, 950, 6800],
                         backgroundColor: 'red',  // Set expenses bars to red
-                        borderWidth: 1,
+                        borderWidth: 1
                     }]
                 },
                 options: {

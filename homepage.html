@@ -25,7 +25,7 @@
   </nav>
 </header>
 
-<body style="display: flex;flex-direction: column;">
+<body style="display: flex;flex-direction: column;gap: 20px;">
   <div class="container-fluid">
     <div class="row">
       <!-- Sidebar -->
@@ -73,7 +73,7 @@
         <div class="position-absolute bottom-0 ">
           <ul class="nav flex-column mb-3">
             <li class="nav-item" id="logout">
-              <a class="nav-link" style="margin-bottom: 10%;"  href="login.html">
+              <a class="nav-link" href="login.html">
                 <span id="lgout"><i class="bi bi-box-arrow-right"></i>Logout</span>
               </a>
             </li>
@@ -83,6 +83,10 @@
 
       <!-- Page content -->
       <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
+        <div class="text-end fixed mt-3" style="margin-right: 10px; padding-top: 30px; margin-bottom: 10px;">
+          <button id="ttsBtn" class="btn btn-primary" hidden>Read aloud</button>
+          <p><small>Shortcut: Press <strong>Ctrl + b</strong> to activate Read Aloud</small></p>
+        </div>
 
         <div class="content">
           <!-- Dashboard Cards -->
@@ -97,7 +101,7 @@
             </div>
             <div class="card">
               <h3>Total Balance</h3>
-              <p class="text-success" id="Total_Balance"></p>
+              <p  id="Total_Balance"></p>
             </div>
           </div>
 
@@ -179,6 +183,11 @@
       
 
       let Total_Balance_doc = document.getElementById('Total_Balance');
+      if(totalBalance>0){
+        Total_Balance_doc.classList.add('text-success');
+      }else{
+        Total_Balance_doc.classList.add('text-danger');
+      }
       Total_Balance_doc.innerText=`₹ ${totalBalance}`
     }
     
@@ -227,6 +236,59 @@
         });
     }
     
+    // Function to stop and restart speech
+  function startSpeech(text) {
+    // If any speech is ongoing, stop it immediately
+    window.speechSynthesis.cancel();
+
+    // Create a new SpeechSynthesisUtterance instance for the new content
+    let speech = new SpeechSynthesisUtterance();
+    speech.text = text;
+    speech.lang = 'en-US';
+    speech.pitch = 1;
+    speech.rate = 1;
+
+    // Speak the content
+    window.speechSynthesis.speak(speech);
+  }
+
+  // Function to read out the content using Web Speech API
+  function speakText(text) {
+    startSpeech(text);
+  }
+
+  // Gather the content from the dashboard
+  function readDashboardSummary() {
+    let totalIncome = document.getElementById('Total_Income').innerText;
+    let totalExpenses = document.getElementById('Total_Expenses').innerText;
+    let totalBalance = document.getElementById('Total_Balance').innerText;
+
+    let transactions = document.querySelectorAll('#expenseList .list-group-item');
+    let transactionTexts = '';
+    transactions.forEach((transaction, index) => {
+      let note = transaction.querySelector('span').innerText;
+      let date = transaction.querySelector('small').innerText;
+      let type = transaction.querySelector('.text-success') ? 'Income' : 'Expense';
+      let amount = transaction.querySelector('.text-success, .text-danger').innerText;
+      transactionTexts += `Transaction ${index + 1} is ${type}: ${note} on ${date}, Amount: ${amount}. `;
+    });
+
+    let summary = `Your total income is ${totalIncome}. Your total expenses are ${totalExpenses}. 
+                   Your balance is ${totalBalance}. 
+                   Here are your latest transactions: ${transactionTexts}`;
+
+    speakText(summary);
+  }
+
+  // Add event listener to the button
+  document.getElementById('ttsBtn').addEventListener('click', readDashboardSummary);
+
+  // Add keyboard shortcut (Ctrl + R) to trigger the dashboard summary
+  document.addEventListener('keydown', function (event) {
+    if (event.ctrlKey && event.key === 'b') {  // Ctrl + R to activate
+      readDashboardSummary();
+    }
+  });
 
 
 </script>

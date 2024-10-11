@@ -26,7 +26,7 @@
     </nav>
 </header>
 
-<body style="display: flex;flex-direction: column;">
+<body style="display: flex;flex-direction: column;gap: 20px;">
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
@@ -48,7 +48,7 @@
                                 <i class="bi bi-plus-circle"></i>Add Inc/Exp
                             </a>
                         </li>
-                        <li class="nav-item ">
+                        <li class="nav-item">
                             <a class="nav-link active" href="transactions.html">
                                 <i class="bi bi-arrow-left-right"></i> Transactions
                             </a>
@@ -74,7 +74,7 @@
                 <div class="position-absolute bottom-0 w-95">
                     <ul class="nav flex-column mb-3">
                         <li class="nav-item" id="logout">
-                            <a class="nav-link" style="margin-bottom: 10%;"  href="login.html">
+                            <a class="nav-link" href="login.html">
                                 <span id="lgout"><i class="bi bi-box-arrow-right"></i>Logout</span>
                             </a>
                         </li>
@@ -82,7 +82,11 @@
                 </div>
             </nav>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-6 content" style="     display: flex;">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-6 content">
+                <div class="text-end" style="margin-right: 10px; padding-top: 30px; margin-bottom: 10px;">
+                    <button id="ttsBtn" class="btn btn-primary" hidden>Read aloud</button>
+                    <p><small>Shortcut: Press <strong>Ctrl + b</strong> to activate Read Aloud</small></p>
+                </div>
 
                 <div class="card col-lg-12">
                     <div class="card-body">
@@ -247,6 +251,55 @@
 
         main.appendChild(expenseListDIV);
     }
+
+    // Function to stop and restart speech
+  function startSpeech(text) {
+    // If any speech is ongoing, stop it immediately
+    window.speechSynthesis.cancel();
+
+    // Create a new SpeechSynthesisUtterance instance for the new content
+    let speech = new SpeechSynthesisUtterance();
+    speech.text = text;
+    speech.lang = 'en-US';
+    speech.pitch = 1;
+    speech.rate = 1;
+
+    // Speak the content
+    window.speechSynthesis.speak(speech);
+  }
+
+  // Function to read out the content using Web Speech API
+  function speakText(text) {
+    startSpeech(text);
+  }
+
+  // Gather the content from the dashboard
+  function readDashboardSummary() {
+    let transactions = document.querySelectorAll('#expenseList .list-group-item');
+    let transactionTexts = '';
+    transactions.forEach((transaction, index) => {
+      let note = transaction.querySelector('span').innerText;
+      let date = transaction.querySelector('small').innerText;
+      let type = transaction.querySelector('.text-success') ? 'Income' : 'Expense';
+      let amount = transaction.querySelector('.text-success, .text-danger').innerText;
+      transactionTexts += `Transaction ${index + 1} is ${type}: ${note} on ${date}, Amount: ${amount}. `;
+    });
+
+    let summary = `Here are your transactions: ${transactionTexts}`;
+
+    speakText(summary);
+  }
+
+  // Add event listener to the button
+  document.getElementById('ttsBtn').addEventListener('click', readDashboardSummary);
+
+  // Add keyboard shortcut (Ctrl + R) to trigger the dashboard summary
+  document.addEventListener('keydown', function (event) {
+    if (event.ctrlKey && event.key === 'b') {  // Ctrl + R to activate
+      readDashboardSummary();
+    }
+  });
+
 </script>
 
 </html>

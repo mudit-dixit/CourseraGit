@@ -3,9 +3,8 @@
   <head>
     <title>Be My Valentine?</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js"></script>
     <style>
-      /* Previous styles remain the same until .buttons */
       body {
         display: flex;
         flex-direction: column;
@@ -17,6 +16,7 @@
         font-family: Arial, sans-serif;
         padding: 20px;
         box-sizing: border-box;
+        overflow-x: hidden;
       }
 
       .container {
@@ -34,6 +34,7 @@
       }
 
       .heart {
+        z-index: 9;
         font-size: min(100px, 30vw);
         color: #ff4d4d;
         animation: pulse 1s infinite;
@@ -116,31 +117,33 @@
         display: flex;
         justify-content: center;
         gap: 20px;
+        flex-wrap: wrap;
       }
 
       #yesBtn {
         background-color: #ff4d4d;
         color: white;
         border: none;
-        padding: min(10px, 3vw) min(20px, 6vw);
+        padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
-        transition: transform 0.3s;
-        font-size: min(16px, 4.5vw);
+        transition: all 0.3s;
         z-index: 2;
+        font-size: 16px;
+        white-space: nowrap;
       }
 
       #noBtn {
         background-color: gray;
         color: black;
         border: 1px solid gray;
-        padding: min(10px, 3vw) min(20px, 6vw);
+        padding: 10px 20px;
         border-radius: 5px;
         cursor: pointer;
         position: absolute;
         transition: all 0.3s;
-        font-size: min(16px, 4.5vw);
         z-index: 1;
+        font-size: 16px;
         left: 50%;
         transform: translateX(20px);
       }
@@ -162,29 +165,13 @@
         }
       }
 
-      @media (max-height: 600px) {
-        .heart-container {
-          height: min(250px, 70vh);
-        }
-
-        .buttons {
-          margin-top: 10px;
-        }
-
-        .celebration {
-          margin-top: 10px;
-        }
-      }
-
       @media (max-width: 350px) {
         body {
           padding: 10px;
         }
-
         .container {
           padding: 10px;
         }
-
         .button-container {
           gap: 10px;
         }
@@ -199,7 +186,7 @@
         <img src="./2.png" alt="Cute image 2" class="small-image image-2" />
         <img src="./3.png" alt="Cute image 3" class="small-image image-3" />
         <img src="./4.png" alt="Cute image 4" class="small-image image-4" />
-        <img src="./5.jpg" alt="Final celebration image" class="final-image" />
+        <img src="./5.png" alt="Final celebration image" class="final-image" />
       </div>
       <div class="question">Will you be my Valentine?</div>
       <div class="buttons">
@@ -212,7 +199,8 @@
     </div>
 
     <script>
-      let yesButtonSize = Math.min(16, window.innerWidth * 0.045);
+      let yesButtonSize = 16;
+      const growthRate = 2; // Increased growth rate
       const yesBtn = document.getElementById('yesBtn');
       const noBtn = document.getElementById('noBtn');
       const celebration = document.querySelector('.celebration');
@@ -220,7 +208,6 @@
       const finalImage = document.querySelector('.final-image');
       const smallImages = document.querySelectorAll('.small-image');
 
-      // Set initial position for no button
       function setInitialNoButtonPosition() {
         const buttonsRect = document
           .querySelector('.buttons')
@@ -235,9 +222,7 @@
       yesBtn.addEventListener('click', () => {
         noBtn.style.display = 'none';
         heart.style.display = 'none';
-        smallImages.forEach((img) => {
-          img.style.display = 'none';
-        });
+        smallImages.forEach((img) => (img.style.display = 'none'));
         finalImage.style.display = 'block';
         celebration.style.display = 'block';
 
@@ -253,7 +238,6 @@
           };
 
           shootConfetti();
-
           let count = 0;
           const confettiInterval = setInterval(() => {
             shootConfetti();
@@ -265,9 +249,8 @@
         }
       });
 
-      // Function to handle no button movement
       const moveNoButton = (event) => {
-        event.preventDefault(); // Prevent default touch behavior
+        event.preventDefault();
         const padding = 20;
         const maxX = window.innerWidth - noBtn.offsetWidth - padding;
         const maxY = window.innerHeight - noBtn.offsetHeight - padding;
@@ -278,16 +261,20 @@
         noBtn.style.left = `${x}px`;
         noBtn.style.top = `${y}px`;
 
-        yesButtonSize = Math.min(yesButtonSize + 4, window.innerWidth * 0.1);
+        // Increase button size with no maximum limit
+        yesButtonSize += growthRate;
         yesBtn.style.fontSize = `${yesButtonSize}px`;
+        yesBtn.style.padding = `${yesButtonSize / 2}px ${yesButtonSize}px`;
+
+        // Ensure button container can accommodate growing button
+        const buttonContainer = document.querySelector('.button-container');
+        buttonContainer.style.minHeight = `${yesButtonSize * 2}px`;
       };
 
-      // Add both mouse and touch events
       noBtn.addEventListener('mouseover', moveNoButton);
       noBtn.addEventListener('touchstart', moveNoButton);
       noBtn.addEventListener('click', moveNoButton);
 
-      // Handle window resize
       window.addEventListener('resize', () => {
         if (noBtn.style.position !== 'fixed') {
           setInitialNoButtonPosition();
